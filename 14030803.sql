@@ -116,3 +116,8 @@ select categoryname,productid,unitprice As MaxPrice from(
 select cat.categoryname,productid,unitprice,rank()over(partition by prod.categoryid order by unitprice desc) rnk from Products prod
 inner join Categories cat on cat.CategoryID=prod.CategoryID)as tab where rnk=1
 order by 3 desc
+-----------------------------------
+select CustomerName,'1402/10/01' as DateExpire,
+case when '1402/10/01'<format(GETDATE(),'yyyy/MM/dd','fa') then N'سررسید شده' else N'سررسید نشده' end as Status
+from tmp_claim where Type=N'چک'
+------------------------------------
